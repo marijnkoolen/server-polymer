@@ -1,15 +1,20 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymer-ajax/polymer-ajax.html">
 
-<polymer-element name="cth-student" noscript>
+<polymer-element name="cth-student">
 	<template>
 	<div>
-		<button name="showName" onclick="show_name()">Show name</button>
+		<button name="showName" on-click="show_name()">Show name</button>
 		<p>Hello all!</p>
-		<polymer-ajax url="https://popping-fire-9951.firebaseio.com/students/.json" auto handleAs="json" response="{{blablabla}}"></polymer-ajax>
-		<template repeat="{{ blabla in blablabla }}">
-			<p>Hello {{blabla.studentName}}!</p>
-		</template>
+		<polymer-ajax url="../json/articlesearch.json" auto handleAs="json" response="{{results}}"></polymer-ajax>
 	</div>
 	</template>
+	<script>
+		Polymer('cth-student', {
+			results: "",
+			resultsChanged: function() {
+				console.log(this.results.response.docs[0]);
+			}
+		});
+	</script>
 </polymer-element>
