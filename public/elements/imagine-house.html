@@ -1,4 +1,4 @@
-<polymer-element name="imagine-house" attributes="url total" noscript>
+<polymer-element name="imagine-house" attributes="url total numClicks">
   <template>
     <style>
       :host {
@@ -34,6 +34,7 @@
           this.percentage = 0;
         } else {
           this.percentage = parseInt((this.count / this.total) * 100);
+		  console.log(this);
         }
       },
       increaseCount: function(){

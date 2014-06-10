@@ -6,14 +6,23 @@
 	<div>
 		<button name="showName" on-click="show_name()">Show name</button>
 		<p>Hello all!</p>
-		<polymer-ajax url="../json/articlesearch.json" auto handleAs="json" response="{{results}}"></polymer-ajax>
+		<polymer-ajax url="http://api.nytimes.com/svc/search/v2/articlesearch.json?q=terrorists&api-key=6c208c379cac770e9c0900819ad9ad74:10:67186206" auto handleAs="json" response="{{results}}"></polymer-ajax>
 	</div>
+		<template repeat="{{element in results.response.docs}}">
+			<p>word count: {{element.word_count}}</p>
+			<template repeat="{{keyword in element.keywords}}">
+				<p>{{keyword.value}}</p>
+			</template>
+			<template repeat="{{image in element.multimedia}}">
+				<img src="http://graphics8.nytimes.com/{{image.url}}">
+			</template>
+		</template>
 	</template>
 	<script>
 		Polymer('cth-student', {
 			results: "",
 			resultsChanged: function() {
-				console.log(this.results.response.docs[0]);
+				console.log(this.results);
 			}
 		});
 	</script>
